@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+// Recursive preorder function
+void preorder(TreeNode* root, vector<int>& result) {
+    if (root == NULL) return;
+
+    result.push_back(root->val);        // Visit root
+    preorder(root->left, result);       // Traverse left subtree
+    preorder(root->right, result);      // Traverse right subtree
+}
+
+vector<int> preorderTraversal(TreeNode* root) {
+    vector<int> result;
+    preorder(root, result);
+    return result;
+}
+
+// Driver code
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root->right = new TreeNode(2);
+    root->right->left = new TreeNode(3);
+
+    vector<int> ans = preorderTraversal(root);
+    for (int x : ans) cout << x << " ";
+    return 0;
+}
