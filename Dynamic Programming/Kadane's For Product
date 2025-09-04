@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxProductSubarray(vector<int>& nums) {
+    int n = nums.size();
+    if (n == 0) return 0;
+
+    int maxProd = nums[0];
+    int minProd = nums[0];
+    int ans = nums[0];
+
+    for (int i = 1; i < n; i++) {
+        int curr = nums[i];
+
+        // If current number is negative, swap max and min
+        if (curr < 0) {
+            swap(maxProd, minProd);
+        }
+
+        // Update max and min product at this position
+        maxProd = max(curr, maxProd * curr);
+        minProd = min(curr, minProd * curr);
+
+        // Update answer
+        ans = max(ans, maxProd);
+    }
+
+    return ans;
+}
+
+int main() {
+    vector<int> nums = {2, 3, -2, 4, -1};
+    cout << "Maximum Product Subarray: " << maxProductSubarray(nums) << endl;
+    return 0;
+}
